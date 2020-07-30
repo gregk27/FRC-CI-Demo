@@ -19,7 +19,47 @@ jobs:
       #Build without testing so we know whether it builds
     - name: Build
       run: ./gradlew build -x test
-      
+  
+  # Unit tests 
+  test:
+    runs-on: ubuntu-latest
+  
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - name: Set up JDK 11
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.11
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+    - name: Build with Gradle
+      run: ./gradlew build
+      #Test subsystems first, as they are the lowest-level tests
+    - name: Test Subsystems
+      run: ./gradlew subsystemTest
+      #Command tests depend on subsystems, so they are next
+    - name: Test commands
+      run: ./gradlew commandTest
+      #Auto commands depend on commands, so they are next
+    - name: Test auto commands
+      run: ./gradlew autoTest
+      #Finally simulation tests may include many of the above
+    - name: Simulation tests
+      run: ./gradlew simTest
+      #If there is a failure, re-run all tests to generate the complete report
+    - name: Generate report (on fail)
+      if: ${{ failure() }}
+      run: ./gradlew test || echo Report generated
+    - name: Upload report (on fail)
+      if: ${{ failure() }}
+      uses: actions/upload-artifact@v1
+      with:
+        name: Test Report - ${{ github.sha }}
+        path: build/reports/tests/test/
+
+
   syntax:
     runs-on: ubuntu-latest
 

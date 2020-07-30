@@ -87,3 +87,53 @@ jar {
     from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
     manifest edu.wpi.first.gradlerio.GradleRIOPlugin.javaManifest(ROBOT_MAIN_CLASS)
 }
+
+// General test config
+test {
+	testLogging {
+		events "failed"
+		exceptionFormat "full"
+	}
+    outputs.upToDateWhen { false }
+}
+
+// Run tests for subsystems only
+task subsystemTest( type: Test ) {
+    include 'ler/robot/subsystems/**'
+	testLogging {
+		events "failed"
+		exceptionFormat "full"
+	}
+    outputs.upToDateWhen { false }
+}
+
+// Run tets for commands only
+task commandTest( type: Test ) {
+    include 'ler/robot/commands/**'
+    exclude 'ler/robot/commands/autonomous/**'
+	testLogging {
+		events "failed"
+		exceptionFormat "full"
+	}
+    outputs.upToDateWhen { false }
+}
+
+// Run tests for autonomous commands only
+task autoTest( type:Test ) {
+    include 'ler/robot/commands/autonomous/**'
+	testLogging {
+		events "failed"
+		exceptionFormat "full"
+	}
+    outputs.upToDateWhen { false }
+}
+
+// Run tests that simulate full robot only
+task simTest( type: Test ) {
+    include 'ler/robot/*'
+	testLogging {
+		events "failed"
+		exceptionFormat "full"
+	}
+    outputs.upToDateWhen { false }
+}
