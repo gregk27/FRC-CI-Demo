@@ -7,8 +7,14 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.subsystems.Intake;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -17,6 +23,17 @@ import edu.wpi.first.wpilibj.XboxController;
  * (including subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+
+  // Intake hardware
+  /** Talon to spin roller. */ 
+  TalonSRX intakeTalon = new TalonSRX(0);
+  /** Spark Max to spin secondary roller. */
+  CANSparkMax intakeSpark = new CANSparkMax(0, MotorType.kBrushless);
+  /** Pison to deploy/retract the intake. */
+  DoubleSolenoid intakePiston = new DoubleSolenoid(0,1); 
+
+
+  Intake intake = new Intake(intakeTalon, intakeSpark, intakePiston);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
