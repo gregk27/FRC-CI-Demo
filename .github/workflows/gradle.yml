@@ -1,0 +1,39 @@
+name: Java CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - name: Set up JDK 11
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.11
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      #Build without testing so we know whether it builds
+    - name: Build
+      run: ./gradlew build -x test
+      
+  syntax:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.11
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Checkstyle
+        run: ./gradlew checkstyle
+      - uses: jwgmeligmeyling/checkstyle-github-action@v1
+        with:
+          path: 'build/reports/checkstyle/main.xml'
+  
