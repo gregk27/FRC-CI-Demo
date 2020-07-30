@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -75,6 +76,8 @@ public class IntakeCommandTest {
         assertTrue("Intake not deployed", intake.isDeployed());
         assertEquals(CONTROL_MODE_MESSAGE, ControlMode.PercentOutput, intakeTalon.controlMode);
         assertEquals("Talon not spinning", Intake.INTAKE_SPEED, intakeTalon.setpoint, SPEED_TOLERANCE);
+        assertFalse("Spark in PID mode", intakeSpark.pidMode);
+        assertEquals("Spark not spinning", Intake.INTAKE_SPEED, intakeSpark.setpoint, SPEED_TOLERANCE);
     }
 
     /**
@@ -95,7 +98,9 @@ public class IntakeCommandTest {
         // Assert
         // assertFalse("Intake not retracted", intake.isDeployed());
         assertEquals(CONTROL_MODE_MESSAGE, ControlMode.PercentOutput, intakeTalon.controlMode);
-        assertEquals("Talon not spinning", 0, intakeTalon.setpoint, 0);
+        assertEquals("Talon not stopped", 0, intakeTalon.setpoint, 0);        
+        assertFalse("Spark in PID mode", intakeSpark.pidMode);
+        assertEquals("Spark not stopped", 0, intakeSpark.setpoint, 0);
     }
 
 
