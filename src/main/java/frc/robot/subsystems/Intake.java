@@ -17,8 +17,8 @@ public class Intake extends SubsystemBase{
     CANSparkMax spark;
     DoubleSolenoid piston;
 
-    private static final Value DEPLOYED = Value.kForward;
-    private static final Value RETRACTED = Value.kReverse;
+    static final Value DEPLOYED = Value.kForward;
+    static final Value RETRACTED = Value.kReverse;
 
     public static final double INTAKE_SPEED = 0.8;
 
@@ -33,6 +33,10 @@ public class Intake extends SubsystemBase{
         this.talon = mainRoller;
         this.spark = secondRoller;
         this.piston = piston;
+
+        //Initialize the subsystem
+        stop();
+        retract();
     }
 
     /**
