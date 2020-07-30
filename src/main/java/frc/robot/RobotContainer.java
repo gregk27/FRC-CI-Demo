@@ -13,7 +13,10 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.IntakeCommand;
 import frc.robot.subsystems.Intake;
 
 /**
@@ -35,6 +38,8 @@ public class RobotContainer {
 
   Intake intake = new Intake(intakeTalon, intakeSpark, intakePiston);
 
+  Joystick joy = new Joystick(0);
+
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
@@ -50,6 +55,8 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+      // Run the command while the button is held
+      new JoystickButton(joy, 0).whileHeld(new IntakeCommand(intake));
   }
 
 
