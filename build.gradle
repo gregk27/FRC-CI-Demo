@@ -1,6 +1,26 @@
 plugins {
     id "java"
     id "edu.wpi.first.GradleRIO" version "2020.3.2"
+    id 'checkstyle'
+}
+
+// Configure checkstyle
+checkstyle {
+    toolVersion = '8.33'
+    configFile = file("${rootDir}/checkstyle.xml")
+    sourceSets = []
+}
+// Create checkstyle task
+task Checkstyle(type: Checkstyle) {
+    dependsOn 'checkstyleMain'
+    source 'src/main/*'
+    // empty classpath
+    classpath = rootProject.files()
+
+    reports {
+        xml.enabled false
+        html.enabled false
+    }
 }
 
 sourceCompatibility = JavaVersion.VERSION_11
