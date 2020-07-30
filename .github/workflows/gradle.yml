@@ -35,7 +35,7 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./gradlew build -x test
       #Test subsystems first, as they are the lowest-level tests
     - name: Test Subsystems
       run: ./gradlew subsystemTest
