@@ -11,14 +11,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import ca.gregk.frcmocks.ctre.MockCTREController;
+import ca.gregk.frcmocks.rev.MockCANSparkMax;
+import ca.gregk.frcmocks.scheduler.MockButton;
+import ca.gregk.frcmocks.scheduler.MockHardwareExtension;
+import ca.gregk.frcmocks.scheduler.TestWithScheduler;
+import ca.gregk.frcmocks.wpilib.MockDoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.Intake;
-import ler.mocks.ctre.MockCTREController;
-import ler.mocks.rev.MockCANSparkMax;
-import ler.mocks.scheduler.MockButton;
-import ler.mocks.scheduler.MockHardwareExtension;
-import ler.mocks.scheduler.TestWithScheduler;
-import ler.mocks.wpilib.MockDoubleSolenoid;
 
 /**
  * Tests to ensure functionality of IntakeCommand and associated subsystems.

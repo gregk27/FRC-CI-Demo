@@ -10,10 +10,10 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import org.junit.Before;
 import org.junit.Test;
 
+import ca.gregk.frcmocks.ctre.MockCTREController;
+import ca.gregk.frcmocks.rev.MockCANSparkMax;
+import ca.gregk.frcmocks.wpilib.MockDoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import ler.mocks.ctre.MockCTREController;
-import ler.mocks.rev.MockCANSparkMax;
-import ler.mocks.wpilib.MockDoubleSolenoid;
 
 /**
  * JUnit test to assert functionality of the intake subsystem.
