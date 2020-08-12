@@ -5,12 +5,11 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import ca.gregk.frcmocks.ctre.MockCTREController;
+import ca.gregk.frcmocks.ctre.MockTalonSRX;
 import ca.gregk.frcmocks.rev.MockCANSparkMax;
 import ca.gregk.frcmocks.wpilib.MockDoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -20,7 +19,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
  */
 public class IntakeTest {
     
-    MockCTREController<TalonSRX> talon;
+    MockTalonSRX talon;
     MockCANSparkMax spark;
     MockDoubleSolenoid solenoid;
 
@@ -35,7 +34,7 @@ public class IntakeTest {
     @Before
     public void setup(){
         // Create hardware devices
-        talon = new MockCTREController<>(TalonSRX.class);
+        talon = new MockTalonSRX();
         spark = new MockCANSparkMax();
         solenoid = new MockDoubleSolenoid();
 

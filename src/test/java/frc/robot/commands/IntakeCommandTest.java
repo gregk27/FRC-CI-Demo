@@ -5,13 +5,12 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import ca.gregk.frcmocks.ctre.MockCTREController;
+import ca.gregk.frcmocks.ctre.MockTalonSRX;
 import ca.gregk.frcmocks.rev.MockCANSparkMax;
 import ca.gregk.frcmocks.scheduler.MockButton;
 import ca.gregk.frcmocks.scheduler.MockHardwareExtension;
@@ -27,7 +26,7 @@ public class IntakeCommandTest {
     
     CommandScheduler scheduler = null;
 
-    MockCTREController<TalonSRX> intakeTalon;
+    MockTalonSRX intakeTalon;
     MockCANSparkMax intakeSpark;
     MockDoubleSolenoid intakePiston;
 
@@ -50,7 +49,7 @@ public class IntakeCommandTest {
         MockHardwareExtension.beforeAll();
 
         // Setup subsystems
-        intakeTalon = new MockCTREController<>(TalonSRX.class);
+        intakeTalon = new MockTalonSRX();
         intakeSpark = new MockCANSparkMax();
         intakePiston = new MockDoubleSolenoid();
         intake = new Intake(intakeTalon.getMock(), intakeSpark.getMock(), intakePiston.getMock());
